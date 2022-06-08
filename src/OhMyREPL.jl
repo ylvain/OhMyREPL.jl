@@ -125,7 +125,10 @@ function __init__()
 
     if ccall(:jl_generating_output, Cint, ()) == 0
         include(joinpath(@__DIR__, "refresh_lines.jl"))
-        include(joinpath(@__DIR__, "output_prompt_overwrite.jl"))
+        # Remove output_prompt_overwrite so that ^Q works again
+        # https://github.com/KristofferC/OhMyREPL.jl/issues/241
+        # https://github.com/KristofferC/OhMyREPL.jl/issues/267
+        # include(joinpath(@__DIR__, "output_prompt_overwrite.jl"))
         include(joinpath(@__DIR__, "MarkdownHighlighter.jl"))
     end
 end
